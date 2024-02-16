@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class RECT{
+Px
+Py
+Dx
+Dy
+onClick(x,y)
+onMove(x,y)
+onKeyPress(Key)
+Draw_Border(x,y,dx,dy)
+Draw_pic(x,y,dx,dy,pic)
+Draw_fill(x,y,dy,color)
+}
+
+class Botones{
+texto
+color
+tamaño
+forma
+acción
+setTexto()
+getColor()
+setColor()
+getTamaño()
+setTamaño()
+setForma()
+getForma()
+}
+
+
+
+@enduml
