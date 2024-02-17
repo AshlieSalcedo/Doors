@@ -2,33 +2,65 @@
 'https://plantuml.com/sequence-diagram
 
 class RECT{
-Px
-Py
-Dx
-Dy
-onClick(x,y)
-onMove(x,y)
-onKeyPress(Key)
-Draw_Border(x,y,dx,dy)
-Draw_pic(x,y,dx,dy,pic)
-Draw_fill(x,y,dy,color)
+-Px
+-Py
+-Dx
+-Dy
++onClick(x,y)
++onMove(x,y)
++onKeyPress(Key)
++Draw_Border(x,y,dx,dy)
++Draw_pic(x,y,dx,dy,pic)
++Draw_fill(x,y,dy,color)
 }
 
-class Botones{
-texto
-color
-tamaño
-forma
-acción
-setTexto()
-getColor()
-setColor()
-getTamaño()
-setTamaño()
-setForma()
-getForma()
+class modificadoresPestaña{
+-Boton verde
+-Boton rojo
+-Boton amarillo
+-Barra superior
++cerrar()
++minimizar()
++maximizar()
++arrastrar()
 }
 
+class cuadroDeTexto {
+-limiteSD
+-limiteID
+-limiteSZ
+-limiteIZ
+-posicion
++Escribir(posicion)
+}
 
+class inicioEscritura {
+-px
+-py
++senalarPosicion(px,py)
+}
+
+cuadroDeTexto --> inicioEscritura
+
+class menuOpciones {
+-op1
+-op2
+-op3
+-op4
++elegirOpcion(px,py)
+}
+class opciones {
+-titulo
+-dibujo
++buscar()
++verDocumentos()
++compartir()
++reproducir()
+}
+menuOpciones --> opciones
+RECT ---> menuOpciones
+
+RECT ---> modificadoresPestaña
+RECT ---> cuadroDeTexto
 
 @enduml
