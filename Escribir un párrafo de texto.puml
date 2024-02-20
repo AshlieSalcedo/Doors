@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant Ashlie
+
+participant RECT
+
+
+
+participant PartTitulo [
+    =Pestaña
+    ----
+    ""Barra Titulo""
+]
+
+participant Pestaña
+
+participant PartTexto [
+    =Cuerpo
+    ----
+    ""Cuadro de texto""
+]
+
+participant PC
+
+
+
+Ashlie -> RECT : Acercar el cursor al botón verde y clickea
+RECT -> PartTitulo : Botón verde maximiza la pestaña
+PartTitulo -> Pestaña : maximizarPestaña()
+Pestaña -> Pestaña : Pestaña maximizada
+
+Ashlie -> RECT : Arrastra y clickea dentro del cuadro de texto
+RECT -> PartTexto : Se situa en el cuadro de texto
+PartTexto -> Ashlie : Listo para escribir
+Ashlie -> RECT : Teclea el texto
+RECT -> PartTexto : Inserta las letras
+PartTexto -> Pestaña : escribir()
+Pestaña -> Ashlie : Muestra el texto
+Ashlie <-> RECT : Sigue escribiendo
+RECT <-> PartTexto :Inserta las letras
+Ashlie -> PartTexto : Acaba de escribir
+Ashlie -> RECT : Se desplaza al botón rojo y clickea
+RECT -> PartTitulo : Botón rojo cierra la pestaña
+PartTitulo -> Pestaña : cerrarPestaña()
+Pestaña -> Pestaña : Pestaña cerrada
+Ashlie -> PC : Apaga el PC
+
+@enduml
