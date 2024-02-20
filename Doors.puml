@@ -21,16 +21,13 @@ Draw_pic(x,y,dx,dy,pic)
 Draw_fill(x,y,dy,color)
 }
 
-class cuerpo {
--
-}
 
 class barraTitulo {
 -titulo pestaña
 -lupa
--icono de control
 - ">"
 -"<"
+-modificadoresPestaña
 +desplazarPestaña()
 +seleccionarOpcion()
 }
@@ -55,41 +52,34 @@ class botonRojo {
 +cerrarPestaña()
 }
 
-class borde {
--Px
--py
-+modificarTamaño()
-}
+
 
 class modificadoresPestaña{
 -botonVerde
 -botonRojo
 -botonAmarillo
--borde
 }
 
-modificadoresPestaña *-- borde
+
 modificadoresPestaña *-- botonRojo
 modificadoresPestaña *-- botonAmarillo
 modificadoresPestaña *-- botonVerde
 modificadoresPestaña --o barraTitulo
 
 class cuadroDeTexto {
--limitSD
--limitID
--limitSZ
--limitIZ
+-Lim UR
+-Lim Ul
+-Lim DR
+-Lim DL
 -posicion
 +Escribir(posicion)
 }
-
-cuadroDeTexto --*pestaña
-
+cuadroDeTexto --* cuerpo
 
 class Posicion {
 -px
 -py
-+senalarPosicion(px,py)
++señalarPosicion(px,py)
 }
 
 
@@ -100,6 +90,8 @@ class menuOpciones {
 -op4
 +elegirOpcion(px,py)
 }
+menuOpciones --* cuerpo
+
 class opciones {
 -titulo
 -dibujo
@@ -108,8 +100,8 @@ class opciones {
 +compartir()
 +reproducir()
 }
-menuOpciones o-- opciones
-RECT <... menuOpciones
+menuOpciones *-- opciones
+
 
 
 cuadroDeTexto ..>Posicion
@@ -122,24 +114,20 @@ class documentos{
 +arrastrarDocumento()
 +enviarDocumento()
 }
-RECT <-.. documentos
 
 class barraInformativa {
 -Información Elemento Seleccionado
 -Hora y fecha
 }
-barraInformativa --* pestaña
+ barraInformativa -* pestaña
 
-class iconoDeControl {
--forma icono
-}
-iconoDeControl --o barraTitulo
 
 class busqueda {
 -icono Lupa
-+busquedaEnPestaña()
++busquedaEnPestaña(texto)
 }
 busqueda --o barraTitulo
+cuadroDeTexto <.busqueda
 
 class cambioPagina {
 -iconoAtras "<"
@@ -150,6 +138,25 @@ class cambioPagina {
 
 cambioPagina --o barraTitulo
 
+class cuerpo {
+-Cuadro de texto
+-Cuadro de dibujo
+-Documentos
+-Menu opciones
+}
+documentos --* cuerpo
+cuerpo --* pestaña
+cuerpo ..> RECT
 
-
+class cuadroDeDibujo {
+-Lim UR
+-Lim Ul
+-Lim DR
+-Lim DL
+-posicion
++Dibujar(posicion)
+}
+cuadroDeDibujo ..> RECT
+cuadroDeDibujo --* cuerpo
+cuadroDeDibujo ..> Posicion
 @enduml
