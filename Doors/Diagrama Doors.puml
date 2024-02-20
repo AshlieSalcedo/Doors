@@ -14,33 +14,63 @@ class RECT{
 +Draw_fill(x,y,dy,color)
 }
 
-class modificadoresPestaña{
--Boton verde
--Boton rojo
--Boton amarillo
--Barra superior
-+cerrar()
-+minimizar()
-+maximizar()
-+arrastrar()
+class barraTitulo {
+-titulo pestaña
++desplazarPestaña()
+}
+barraTitulo..>RECT
+
+class botonVerde {
+-color
+-forma
++maximizarPestaña()
 }
 
+class botonAmarillo {
+-color
+-forma
++minimizarPestaña()
+}
+
+class botonRojo {
+-color
+-forma
++cerrarPestaña()
+}
+
+class borde {
+-Px
+-py
++modificarTamaño()
+}
+
+class modificadoresPestaña{
+-botonVerde
+-botonRojo
+-botonAmarillo
+-borde
+}
+
+modificadoresPestaña *-- borde
+modificadoresPestaña *-- botonRojo
+modificadoresPestaña *-- botonAmarillo
+modificadoresPestaña *-- botonVerde
+
 class cuadroDeTexto {
--limiteSD
--limiteID
--limiteSZ
--limiteIZ
+-limitSD
+-limitID
+-limitSZ
+-limitIZ
 -posicion
 +Escribir(posicion)
 }
 
-class inicioEscritura {
+class Posicion {
 -px
 -py
 +senalarPosicion(px,py)
 }
 
-cuadroDeTexto --> inicioEscritura
 
 class menuOpciones {
 -op1
@@ -57,10 +87,30 @@ class opciones {
 +compartir()
 +reproducir()
 }
-menuOpciones --> opciones
-RECT ---> menuOpciones
+menuOpciones o-- opciones
+RECT <... menuOpciones
 
-RECT ---> modificadoresPestaña
-RECT ---> cuadroDeTexto
+RECT <. modificadoresPestaña
+RECT <.. cuadroDeTexto
+
+cuadroDeTexto ..>Posicion
+
+class documentos{
+-titulo
+-imagen
++editarTitulo()
++seleccionarDocumento()
++arrastrarDocumento()
++enviarDocumento()
+}
+RECT <-.. documentos
+
+class barraInformativa {
+-Información Elemento Seleccionado
+}
+
+
+
+
 
 @enduml
