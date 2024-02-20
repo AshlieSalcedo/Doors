@@ -1,0 +1,155 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class pestaña {
+-Barra Titulo
+-Barra Informativa
+-Cuerpo
+
+}
+
+class RECT{
+Px
+Py
+Dx
+Dy
+onClick(x,y)
+onMove(x,y)
+onKeyPress(Key)
+Draw_Border(x,y,dx,dy)
+Draw_pic(x,y,dx,dy,pic)
+Draw_fill(x,y,dy,color)
+}
+
+class cuerpo {
+-
+}
+
+class barraTitulo {
+-titulo pestaña
+-lupa
+-icono de control
+- ">"
+-"<"
++desplazarPestaña()
++seleccionarOpcion()
+}
+barraTitulo..>RECT
+barraTitulo--* pestaña
+
+class botonVerde {
+-color
+-forma
++maximizarPestaña()
+}
+
+class botonAmarillo {
+-color
+-forma
++minimizarPestaña()
+}
+
+class botonRojo {
+-color
+-forma
++cerrarPestaña()
+}
+
+class borde {
+-Px
+-py
++modificarTamaño()
+}
+
+class modificadoresPestaña{
+-botonVerde
+-botonRojo
+-botonAmarillo
+-borde
+}
+
+modificadoresPestaña *-- borde
+modificadoresPestaña *-- botonRojo
+modificadoresPestaña *-- botonAmarillo
+modificadoresPestaña *-- botonVerde
+modificadoresPestaña --o barraTitulo
+
+class cuadroDeTexto {
+-limitSD
+-limitID
+-limitSZ
+-limitIZ
+-posicion
++Escribir(posicion)
+}
+
+cuadroDeTexto --*pestaña
+
+
+class Posicion {
+-px
+-py
++senalarPosicion(px,py)
+}
+
+
+class menuOpciones {
+-op1
+-op2
+-op3
+-op4
++elegirOpcion(px,py)
+}
+class opciones {
+-titulo
+-dibujo
++buscar()
++verDocumentos()
++compartir()
++reproducir()
+}
+menuOpciones o-- opciones
+RECT <... menuOpciones
+
+
+cuadroDeTexto ..>Posicion
+
+class documentos{
+-titulo
+-imagen
++editarTitulo()
++seleccionarDocumento()
++arrastrarDocumento()
++enviarDocumento()
+}
+RECT <-.. documentos
+
+class barraInformativa {
+-Información Elemento Seleccionado
+-Hora y fecha
+}
+barraInformativa --* pestaña
+
+class iconoDeControl {
+-forma icono
+}
+iconoDeControl --o barraTitulo
+
+class busqueda {
+-icono Lupa
++busquedaEnPestaña()
+}
+busqueda --o barraTitulo
+
+class cambioPagina {
+-iconoAtras "<"
+-iconoAdelante ">"
++irPaginaPrevia()
++irPaginaPost()
+}
+
+cambioPagina --o barraTitulo
+
+
+
+@enduml
